@@ -1,0 +1,56 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid2" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M8 0 H0 V8" stroke="#B6C2D9" stroke-width="0.5" opacity="0.55"/>
+    </pattern>
+  </defs>
+
+  <!-- 背景微网格 -->
+  <rect x="6" y="6" width="84" height="84" fill="url(#grid2)" rx="6" opacity="0.25"/>
+
+  <!-- 坐标轴 -->
+  <g stroke="#111" stroke-width="2" stroke-linecap="round">
+    <line x1="12" y1="78" x2="84" y2="78"/>
+    <line x1="12" y1="78" x2="12" y2="16"/>
+    <!-- 刻度 -->
+    <g stroke-width="1.5" opacity="0.9">
+      <line x1="24" y1="78" x2="24" y2="75"/>
+      <line x1="36" y1="78" x2="36" y2="75"/>
+      <line x1="48" y1="78" x2="48" y2="75"/>
+      <line x1="60" y1="78" x2="60" y2="75"/>
+      <line x1="72" y1="78" x2="72" y2="75"/>
+      <line x1="12" y1="66" x2="15" y2="66"/>
+      <line x1="12" y1="54" x2="15" y2="54"/>
+      <line x1="12" y1="42" x2="15" y2="42"/>
+      <line x1="12" y1="30" x2="15" y2="30"/>
+    </g>
+  </g>
+
+  <!-- 非线性目标曲线 -->
+  <path d="M12 72 C 24 28, 46 64, 84 26" stroke="#111" stroke-width="2.5" fill="none"/>
+
+  <!-- 样条结点（KAN可学习的“结”） -->
+  <g fill="#111">
+    <circle cx="22" cy="58" r="2"/>
+    <circle cx="34" cy="42" r="2"/>
+    <circle cx="46" cy="58" r="2"/>
+    <circle cx="58" cy="44" r="2"/>
+    <circle cx="70" cy="34" r="2"/>
+  </g>
+
+  <!-- 基函数（示意），用虚线小驼峰 -->
+  <g stroke="#111" stroke-width="1.5" opacity="0.75" fill="none" stroke-dasharray="4 3">
+    <path d="M16 76 C 20 60, 28 60, 32 76"/>
+    <path d="M28 76 C 34 56, 42 56, 48 76"/>
+    <path d="M40 76 C 48 54, 56 54, 64 76"/>
+    <path d="M52 76 C 60 56, 68 56, 76 76"/>
+  </g>
+
+  <!-- KAN 标注框 -->
+  <g stroke="#111" stroke-width="1.8" fill="white" stroke-linejoin="round">
+    <rect x="66" y="10" width="18" height="12" rx="2"/>
+    <text x="75" y="19" font-size="8" text-anchor="middle" font-family="Inter,Arial" fill="#111">KAN</text>
+  </g>
+
+  <text x="10" y="92" font-size="9" fill="#111" font-family="Inter,Arial">High-order nonlinearity</text>
+</svg>

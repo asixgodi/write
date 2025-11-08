@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <a href="#/">Home</a> |
+        <a href="#/about">About</a> |
+        <a href="#/contact">Contact</a>
+    </nav>
+    <div id="content"></div>
+</body>
+
+</html>
+<script>
+    //路由映射表
+    const routes = {
+        '/': function () {
+            document.getElementById('content').textContent = 'home page'
+        },
+        '/about': function () {
+            document.getElementById("content").textContent = 'about page'
+        },
+        '/contact': function () {
+            document.getElementById("content").textContent = 'contact page'
+        }
+    }
+
+    //初始化路由
+    function initRoute() {
+        //除去 # 字符
+        // window.location.hash的内容就是#和#后面的路径  substr从第一个开始截取到最后
+        const hash = window.location.hash.substr(1)
+        console.log(window.location.hash);
+
+        if (routes[hash]) {
+            //调用路由处理函数
+            routes[hash]();
+        } else {
+            routes['/']();
+        }
+    }
+
+    //页面加载时初始化路由
+    window.onload = initRoute()
+
+
+    //hashchange用于监听#后面部分的变化
+    window.addEventListener('hashchange', function () {
+        initRoute()
+    })
+</script>

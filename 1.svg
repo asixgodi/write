@@ -1,0 +1,60 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#111"/>
+    </marker>
+    <pattern id="grid" width="6" height="6" patternUnits="userSpaceOnUse">
+      <path d="M6 0 H0 V6" stroke="#B6C2D9" stroke-width="0.5" opacity="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- 背景微网格，科研风 -->
+  <rect x="6" y="6" width="84" height="84" fill="url(#grid)" rx="6" opacity="0.25"/>
+
+  <!-- 多尺度嵌套窗口 -->
+  <g stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="12" y="16" width="30" height="30" rx="2" fill="white" />
+    <rect x="20" y="24" width="30" height="30" rx="2" fill="white" />
+    <rect x="28" y="32" width="30" height="30" rx="2" fill="white" />
+    <!-- 局部纹理（高频） -->
+    <path d="M32 44 c6 -8 12 8 18 0" stroke="#111"/>
+    <path d="M32 48 c6 -8 12 8 18 0" stroke="#111" opacity="0.8"/>
+    <path d="M32 52 c6 -8 12 8 18 0" stroke="#111" opacity="0.6"/>
+  </g>
+
+  <!-- 指向小波四分块 -->
+  <line x1="46" y1="50" x2="64" y2="38" stroke="#111" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 小波子带示意：LL/LH/HL/HH（不使用文字，采用线条频率表示） -->
+  <g transform="translate(64,16)" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="0" y="0" width="24" height="24" rx="2" fill="white"/>
+    <line x1="12" y1="0" x2="12" y2="24"/>
+    <line x1="0" y1="12" x2="24" y2="12"/>
+    <!-- LL（平滑）：少线条 -->
+    <path d="M3 5 H9" />
+    <path d="M3 8 H9" opacity="0.7"/>
+    <!-- LH（垂直高频）：竖频纹 -->
+    <path d="M15 4 V10" />
+    <path d="M18 4 V10" opacity="0.7"/>
+    <path d="M21 4 V10" opacity="0.5"/>
+    <!-- HL（水平高频）：横频纹 -->
+    <path d="M3 14 H9" />
+    <path d="M3 17 H9" opacity="0.7"/>
+    <path d="M3 20 H9" opacity="0.5"/>
+    <!-- HH（对角高频）：斜纹 -->
+    <path d="M15 19 l6 -6" />
+    <path d="M15 21 l6 -6" opacity="0.6"/>
+  </g>
+
+  <!-- 放大镜（强调细节保留） -->
+  <g stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="54" cy="70" r="12" fill="white"/>
+    <line x1="62" y1="78" x2="72" y2="88"/>
+    <path d="M48 66 c4 -6 8 6 12 0" />
+    <path d="M48 70 c4 -6 8 6 12 0" opacity="0.8"/>
+    <path d="M48 74 c4 -6 8 6 12 0" opacity="0.6"/>
+  </g>
+
+  <!-- 标题小注（可删） -->
+  <text x="10" y="92" font-size="9" fill="#111" font-family="Inter,Arial">Multiscale details</text>
+</svg>

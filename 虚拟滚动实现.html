@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="virtual-list-container">
+        <div id="virtual-list-phantom"></div>
+        <div id="virtual-list-content"></div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    #virtual-list-container {
+        height: 500px;
+        /* 容器可视区域的高度 */
+        overflow-y: auto;
+        position: relative;
+        /* 为内容区域的绝对定位提供基准 */
+        border: 1px solid #ccc;
+    }
+
+    #virtual-list-phantom {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        /* 把它放在后面，不影响内容 */
+    }
+
+    #virtual-list-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .list-item {
+        height: 50px;
+        /* 列表项固定高度 */
+        line-height: 50px;
+        padding-left: 20px;
+        box-sizing: border-box;
+    }
+</style>
+<script>
+    const totalCount = 10000; // 总共1万条数据
+    const allData = [];
+    for (let i = 0; i < totalCount; i++) {
+        allData.push({ id: i, value: `Item ${i}` });
+    }
+
+    // 获取DOM元素
+    const container = document.getElementById('virtual-list-container');
+    const phantom = document.getElementById('virtual-list-phantom');
+    const content = document.getElementById('virtual-list-content');
+
+    // --- 核心参数 ---
+    const itemHeight = 50; // 每项的高度
+    const screenHeight = 500; // 容器可视区域高度
+
+    // 计算可渲染的列表项数量 (加一些缓冲区，比如上下各多渲染2个)
+    const visibleCount = Math.ceil(screenHeight / itemHeight) + 4;
+
+    let startIndex = 0; // 可视区域的起始索引
+    let endIndex = startIndex + visibleCount; // 可视区域的结束索引
+
+    // --- 初始化 ---
+    // 1. 设置幽灵元素的高度，撑开滚动条
+    phantom.style.height = `${totalCount * itemHeight}px`;
+
+    // --- 渲染函数 ---
+    function render() {
+        // 截取当前需要渲染的数据
+        const visibleData = allData.slice(startIndex, endIndex);
+
+        // 生成HTML字符串并渲染
+        content.innerHTML = visibleData.map(item =>
+            `<div class="list-item">${item.value}</div>`
+        ).join('');
+
+        // 关键：使用 transform 把内容区域“推”到正确的位置
+        content.style.transform = `translateY(${startIndex * itemHeight}px)`;
+    }
+
+    // --- 监听滚动事件 ---
+    // scrollTop指的是，元素的顶部到可见区域顶部之间的距离
+    container.addEventListener('scroll', () => {
+        const scrollTop = container.scrollTop;
+
+        // 计算新的起始索引
+        startIndex = Math.floor(scrollTop / itemHeight);
+        // 保证 startIndex 不会因为向上滚动缓冲区而变为负数
+        startIndex = Math.max(0, startIndex - 2);
+
+        // 计算新的结束索引
+        endIndex = startIndex + visibleCount;
+
+        // 重新渲染
+        render();
+    });
+
+    // --- 首次渲染 ---
+    render();
+</script>
