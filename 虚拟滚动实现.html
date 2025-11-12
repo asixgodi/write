@@ -18,7 +18,7 @@
 
 <style>
     #virtual-list-container {
-        height: 500px;
+        height: 100vh;
         /* 容器可视区域的高度 */
         overflow-y: auto;
         position: relative;
@@ -64,7 +64,7 @@
 
     // --- 核心参数 ---
     const itemHeight = 50; // 每项的高度
-    const screenHeight = 500; // 容器可视区域高度
+    const screenHeight = container.clientHeight; // 容器可视区域高度
 
     // 计算可渲染的列表项数量 (加一些缓冲区，比如上下各多渲染2个)
     const visibleCount = Math.ceil(screenHeight / itemHeight) + 4;
