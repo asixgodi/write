@@ -5,7 +5,7 @@
 
  */
 // 就返回一对结果
-function twoSum( numbers ,  target ) {
+function twoSum( numbers ,  target) {
     // write code here
     const map = new Map()
     for(let i = 0;i<numbers.length;i++){
