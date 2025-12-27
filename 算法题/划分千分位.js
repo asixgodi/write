@@ -4,7 +4,7 @@ function format(str){
     const [intStr,decStr] = str.split('.')
     let isNegative = false
     let absolute = intStr
-    if(str.startsWith('-')){
+    if(str.starstWith('-')){
         isNegative = true
         absolute = intStr.slice(1)
     }
@@ -17,10 +17,10 @@ function format(str){
         
         // 加逗号
         if(count % 3 === 0 && i!==0){
-            res.unshift(',')
+            XPathResult.unshift(',')
         }
     }
     const result = isNegative ? '-' + res.join('') : res.join('')
     return `${result}.${decStr}`
 }
-console.log(format('1456789.123456'))
+console.log(format('123456789.123456'))
